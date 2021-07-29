@@ -8,17 +8,11 @@
         "private_endpoint_keyVault": {
             "value": "aks-pvtlink-keyVault"
         },
-        "virtualNetworks_name": {
-            "value": "vnet-hub-spoke-aks-eslz-00"
-        },
-        "subnet_privateEndpoint":{
-            "value": "aks-privateEndpoint"
-        },
         "acr_name":{
-            "value": "acrakseslz01"
+            "value": "acrakseslz"
         },
         "keyVault_name":{
-            "value": "kv-aks-eslz01"
+            "value": "kv-aks-eslz"
         }
         
     }

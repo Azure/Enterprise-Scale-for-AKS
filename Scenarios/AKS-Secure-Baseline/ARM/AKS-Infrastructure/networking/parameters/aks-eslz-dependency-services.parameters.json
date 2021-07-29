@@ -3,13 +3,13 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "vaultName": {
-            "value": "kv-aks-eslz01"
+            "value": "kv-aks-eslz"
         },
         "SkuName": {
             "value": "Standard"
         },
         "acrName": {
-            "value": "acrakseslz01"
+            "value": "acrakseslz"
         },
         "acrAdminUserEnabled": {
             "value": true
