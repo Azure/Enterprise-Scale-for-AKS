@@ -1,17 +1,11 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
         "private_endpoint_acr": {
             "type": "String"
         },
         "private_endpoint_keyVault": {
-            "type": "string"
-        },
-        "virtualNetworks_name": {
-            "type": "string"
-        },
-        "subnet_privateEndpoint":{
             "type": "string"
         },
         "acr_name":{
@@ -22,6 +16,10 @@
         }
     },
     "variables": {
+        "spokeVnetName": "vnet_spoke_arm",
+        "privateEndpointSubnet": "aks-privateEndpoint",
+        "uniqueVaultName": "[concat(parameters('keyvault_Name'),'-',take(uniqueString(resourceGroup().id),3))]",
+        "uniqueAcrName": "[concat(parameters('acr_Name'),take(uniqueString(resourceGroup().id),3))]",
         "private_acr_dns_zone": "privatelink.azurecr.io",
         "private_keyVault_dns_zone": "privatelink.vaultcore.azure.net",
         "private_endpoint_dnsgroupname_keyVault": "[concat(parameters('private_endpoint_keyVault'),'/','default')]",
@@ -35,13 +33,13 @@
             "location": "[resourceGroup().location]",
             "properties": {
                 "subnet": {
-                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_name'), parameters('subnet_privateEndpoint'))]"
+                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('spokeVnetName'), variables('privateEndpointSubnet'))]"
                 },
                 "privateLinkServiceConnections": [
                 {
                     "name": "[parameters('private_endpoint_keyVault')]",
                     "properties": {
-                    "privateLinkServiceId": "[resourceId('Microsoft.KeyVault/vaults',parameters('keyVault_name'))]",
+                    "privateLinkServiceId": "[resourceId('Microsoft.KeyVault/vaults',variables('uniqueVaultName'))]",
                     "groupIds": [
                         "vault"
                     ]
@@ -57,13 +55,13 @@
             "location": "[resourceGroup().location]",
             "properties": {
                 "subnet": {
-                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_name'), parameters('subnet_privateEndpoint'))]"
+                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('spokeVnetName'), variables('privateEndpointSubnet'))]"
                 },
                 "privateLinkServiceConnections": [
                 {
                     "name": "[parameters('private_endpoint_acr')]",
                     "properties": {
-                    "privateLinkServiceId": "[resourceId('Microsoft.ContainerRegistry/registries',parameters('acr_name'))]",
+                    "privateLinkServiceId": "[resourceId('Microsoft.ContainerRegistry/registries',variables('uniqueAcrName'))]",
                     "groupIds": [
                         "registry"
                     ]
@@ -99,7 +97,7 @@
             "properties": {
                 "registrationEnabled": false,
                 "virtualNetwork": {
-                    "id": "[resourceId('Microsoft.Network/virtualNetworks',parameters('virtualNetworks_name'))]"
+                    "id": "[resourceId('Microsoft.Network/virtualNetworks',variables('spokeVnetName'))]"
                 }
             }
         },
@@ -114,7 +112,7 @@
             "properties": {
                 "registrationEnabled": false,
                 "virtualNetwork": {
-                    "id": "[resourceId('Microsoft.Network/virtualNetworks',parameters('virtualNetworks_name'))]"
+                    "id": "[resourceId('Microsoft.Network/virtualNetworks',variables('spokeVnetName'))]"
                 }
             }
         },
