@@ -1,0 +1,273 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vnets": {
+            "value": [
+                {
+                    "name": "hub-vnet",
+                    "location": "westus",
+                    "vnetaddressSpace": {
+                        "addressPrefixes": [
+                            "10.0.0.0/16"
+                        ]
+                    },
+                    "subnets": [
+                        {
+                            "name": "default",
+                            "properties": {
+                                "addressPrefix": "10.0.0.0/24"
+                            }
+                        },
+                        {
+                            "name": "AzureFirewallSubnet",
+                            "properties": {
+                                "addressPrefix": "10.0.1.0/24"
+                            }
+                        },
+                        {
+                            "name": "vmsubnet",
+                            "properties": {
+                                "addressPrefix": "10.0.2.0/28"
+                            }
+                        },
+                        {
+                            "name": "AzureBastionSubnet",
+                            "properties": {
+                                "addressPrefix": "10.0.3.0/27"
+                            }
+                        }
+                    ],
+                    "tags": {
+                        "unit": "lab"
+                    }
+                }
+            ]
+        },
+        "bastion": {
+            "value": {
+                "name": "bastion",
+                "publicip": {
+                    "publicipName": "bastion-pip",
+                    "publicipproperties": {
+                        "publicIPAllocationMethod": "Static"
+                    },
+                    "publicipsku": {
+                        "name": "Standard",
+                        "tier": "Regional"
+                    }
+                },
+                "bastionVnetName": "hub-vnet"
+            }
+        },
+        "virtualMachines": {
+            "value": [
+                {
+                    "vmName": "jumpbox",
+                    "vmSize": "Standard_A2",
+                    "userName": "azureuser",
+                    "publicKey": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC8UT7zxOhTMmSL/DYkWMoZW3yor0fUZrcczmfrlcoHTIV1z19tFIw9qELTSKChzF5QJEIGZ+Kfsb7gmVH7o+JHlDNIfci/I1DdCO916uWrqd8/2kIE9tzRJl8Gw2zNMrWNlqniP1LincsVCVcZUVG8H5T3iP8tTDVG4EUe87MNHqYLmDwkf0RSGuafDqtgS0YJsTKk6G5MngHv7gpwkVXc4+kyiwVnXS6ZtoHbvxG0r3q9GS7F5NQig/Jti6o6t6bs3KMtQ7wOZGLhDtmEmB1X3BOaoY8TqIUgOiVgLaJXFlUvDTRpk6h8grpggE2J4NbzAVWC/04GG5XUz2UtXZZuO6oFwZo7ak48p2agTwGUIp58Uk18IWK0hTh72qf5DkPVY2NHBkEu16WBbGvALyR8bZf+Kjwp4i9SQ42iJ3Seo5hLFalkbB8RDL02hXAieYkrQhQ3IFqRWwpXxb+HUpe5nsszWYbBmLQZ1R0MehRYp9U0YanrXhY1ibgN6xRBcJ7x2Xz9BXzz4hVEfU1qr2n8L6Tf24pZ61iAbdsCs60bDPoP3QZMOZYZxwg5sLrR0k4wdXvjKA7lljg7BIS+eEGbOC3lTs/VdkGWkXFwHGzQsW299+uGSAyuZoQtkt3mrcSsM6GykK3Q4Ff8hP7F4fHhQQT3IIwGlXQoRdfE6Mv2+Q==",
+                    "vnetName": "hub-vnet",
+                    "vmSubnetName": "vmsubnet"
+                }
+            ]
+        },
+        "firewall": {
+            "value": {
+                "publicIp": {
+                    "publicipName": "fw-pip",
+                    "publicipproperties": {
+                        "publicIPAllocationMethod": "Static"
+                    },
+                    "publicipsku": {
+                        "name": "Standard",
+                        "tier": "Regional"
+                    }
+                },
+                "vnetName": "hub-vnet",
+                "fwname": "azfirewall",
+                "applicationRuleCollections": [
+                    {
+                        "name": "Helper-tools",
+                        "properties": {
+                            "priority": 101,
+                            "action": {
+                                "type": "Allow"
+                            },
+                            "rules": [
+                                {
+                                    "name": "Allow-ifconfig",
+                                    "protocols": [
+                                        {
+                                            "port": 80,
+                                            "protocolType": "Http"
+                                        },
+                                        {
+                                            "port": 443,
+                                            "protocolType": "Https"
+                                        }
+                                    ],
+                                    "targetFqdns": [
+                                        "ifconfig.co",
+                                        "api.snapcraft.io",
+                                        "jsonip.com",
+                                        "kubernaut.io",
+                                        "motd.ubuntu.com"
+                                    ],
+                                    "sourceAddresses": [
+                                        "10.0.0.0/16",
+                                        "10.1.0.0/16"
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "AKS-egress-application",
+                        "properties": {
+                            "priority": 102,
+                            "action": {
+                                "type": "Allow"
+                            },
+                            "rules": [
+                                {
+                                    "name": "Egress",
+                                    "protocols": [
+                                        {
+                                            "port": 443,
+                                            "protocolType": "Https"
+                                        }
+                                    ],
+                                    "targetFqdns": [
+                                        "*.azmk8s.io",
+                                        "aksrepos.azurecr.io",
+                                        "*.blob.core.windows.net",
+                                        "mcr.microsoft.com",
+                                        "*.cdn.mscr.io",
+                                        "management.azure.com",
+                                        "login.microsoftonline.com",
+                                        "packages.azure.com",
+                                        "acs-mirror.azureedge.net",
+                                        "*.opinsights.azure.com",
+                                        "*.monitoring.azure.com",
+                                        "dc.services.visualstudio.com"
+                                    ],
+                                    "sourceAddresses": [
+                                        "10.0.0.0/16",
+                                        "10.1.0.0/16"
+                                    ]
+                                },
+                                {
+                                    "name": "Registries",
+                                    "protocols": [
+                                        {
+                                            "port": 443,
+                                            "protocolType": "Https"
+                                        }
+                                    ],
+                                    "targetFqdns": [
+                                        "*.data.mcr.microsoft.com",
+                                        "*.azurecr.io",
+                                        "*.gcr.io",
+                                        "gcr.io",
+                                        "storage.googleapis.com",
+                                        "*.docker.io",
+                                        "quay.io",
+                                        "*.quay.io",
+                                        "*.cloudfront.net",
+                                        "production.cloudflare.docker.com"
+                                    ],
+                                    "sourceAddresses": [
+                                        "10.0.0.0/16",
+                                        "10.1.0.0/16"
+                                    ]
+                                },
+                                {
+                                    "name": "Additional-Usefull-Address",
+                                    "protocols": [
+                                        {
+                                            "port": 443,
+                                            "protocolType": "Https"
+                                        }
+                                    ],
+                                    "targetFqdns": [
+                                        "grafana.net",
+                                        "grafana.com",
+                                        "stats.grafana.org",
+                                        "github.com",
+                                        "raw.githubusercontent.com",
+                                        "security.ubuntu.com",
+                                        "security.ubuntu.com",
+                                        "packages.microsoft.com",
+                                        "azure.archive.ubuntu.com",
+                                        "security.ubuntu.com",
+                                        "hack32003.vault.azure.net",
+                                        "*.letsencrypt.org",
+                                        "usage.projectcalico.org",
+                                        "gov-prod-policy-data.trafficmanager.net",
+                                        "vortex.data.microsoft.com"
+                                    ],
+                                    "sourceAddresses": [
+                                        "10.0.0.0/16",
+                                        "10.1.0.0/16"
+                                    ]
+                                },
+                                {
+                                    "name": "AKS-FQDN-TAG",
+                                    "protocols": [
+                                        {
+                                            "port": 80,
+                                            "protocolType": "Http"
+                                        },
+                                        {
+                                            "port": 443,
+                                            "protocolType": "Https"
+                                        }
+                                    ],
+                                    "targetFqdns": [],
+                                    "fqdnTags": [
+                                        "AzureKubernetesService"
+                                    ],
+                                    "sourceAddresses": [
+                                        "10.0.0.0/16",
+                                        "10.1.0.0/16"
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "networkRuleCollections": [
+                    {
+                        "name": "AKS-egress",
+                        "properties": {
+                            "priority": 200,
+                            "action": {
+                                "type": "Allow"
+                            },
+                            "rules": [
+                                {
+                                    "name": "NTP",
+                                    "protocols": [
+                                        "UDP"
+                                    ],
+                                    "sourceAddresses": [
+                                        "10.0.0.0/16",
+                                        "10.1.0.0/16"
+                                    ],
+                                    "destinationAddresses": [
+                                        "*"
+                                    ],
+                                    "destinationPorts": [
+                                        "123"
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "natRuleCollections": []
+            }
+        }
+    }
+}
