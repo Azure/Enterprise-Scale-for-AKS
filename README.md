@@ -14,7 +14,7 @@ In this repo, you get access to various customer [scenarios](./Scenarios) that c
 
 ### Bicep Jumpstart
 A flexible templating approach using Bicep that covers multiple scenarios. It provides tangible artifacts to quickly enable AKS deployments through CLI or in your CI/CD pipeline. 
-Driving the configuration experience is a [GUI to guide your decision making](https://azure.github.io/Aks-Construction/?default=es), which caters for the main Enterprise-Scale deployment modes (Sandbox, Corp & Online).
+Driving the configuration experience is a [wizzard](https://azure.github.io/Aks-Construction/?default=es), to guide your decision making, which caters for the main Enterprise-Scale deployment modes (Sandbox, Corp & Online).
 [Pipeline examples](https://github.com/Azure/Aks-Construction#devops---github-actions) are provided that show infrastructure and application workload testing. 
 
 ### Terraform Landingzones
