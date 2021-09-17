@@ -4,9 +4,23 @@ Enterprise-scale is an architectural approach and a reference implementation tha
 Enterprise-scale for AKS represents the strategic design path and target technical state for an Azure Kubernetes Service (AKS) deployment. This solution provides an architectural approach and reference implementation to prepare landing zone subscriptions for a scalable Azure Kubernetes Service (AKS) cluster. For the architectural guidance, check out [Enterprise-scale for AKS](https://docs.microsoft.com/azure/cloud-adoption-framework/scenarios/aks/enterprise-scale-landing-zone) in Microsoft Docs.
 
 # Enterprise-scale for AKS Reference Implementation
-The reference implementation is split into two repos. This one and the [CAF-Terraform-Landingzones AKS construction set](https://github.com/Azure/caf-terraform-landingzones-starter/tree/starter/enterprise_scale/construction_sets/aks/online/aks_secure_baseline) reference implementation. Click on the link to get access to a reference implementation for Enterprise-Scale for AKS using CAF terraform module that abstracts away having to manually write terraform code and makes use of the Rover devcontainer. This reference implemenation is great for customers familiar with CAF terraform modules or want to get familiar with it.
+The reference implementation is provided by three repos. 
+1. This one
+1. The [GUI driven Bicep jumpstart](https://github.com/Azure/Aks-Construction)
+1. The [CAF-Terraform-Landingzones AKS construction set](https://github.com/Azure/caf-terraform-landingzones-starter/tree/starter/enterprise_scale/construction_sets/aks/online/aks_secure_baseline) reference implementation.
 
+### This repo
 In this repo, you get access to various customer [scenarios](./Scenarios) that can help accelerate the development and deployment of AKS clusters that conform with Enterprise-Scale for AKS best practices and guidelines. Each scenario aims to represent common customer experiences with the goal of accelerating the process of developing and deploying conforming AKS clusters using IaC. Each scenario will eventually have a Terraform, ARM and Bicep version. They will also include CI/CD pipelines to help automate deployment and management of these clusters and the workload that run in them.
+
+### GUI driven Bicep Jumpstart
+A flexible templating approach using Bicep, it provides tangible artifacts to quickly enable AKS deployments through CLI or in your CI/CD pipeline. 
+Driving the configuration experience is a [GUI to guide your decision making](https://azure.github.io/Aks-Construction/?default=es), which caters for the main Enterprise-Scale deployment modes (Sandbox, Corp & Online).
+[Pipeline examples](https://github.com/Azure/Aks-Construction#devops---github-actions) are provided that show infrastructure and application workload testing. 
+
+### Terraform Landingzones
+A [reference implementation](https://github.com/Azure/caf-terraform-landingzones-starter/tree/starter/enterprise_scale/construction_sets/aks/online/aks_secure_baseline) for Enterprise-Scale for AKS using CAF terraform module that abstracts away having to manually write terraform code and makes use of the Rover devcontainer. This reference implementation is great for customers familiar with CAF terraform modules or want to get familiar with it.
+
+---
 
 Below is a picture of what a golden state looks like and open source software like flux and traefik integrate well within the AKS ecosystem.
 
