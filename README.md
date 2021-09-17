@@ -13,7 +13,7 @@ The reference implementation is provided by three repos.
 In this repo, you get access to various customer [scenarios](./Scenarios) that can help accelerate the development and deployment of AKS clusters that conform with Enterprise-Scale for AKS best practices and guidelines. Each scenario aims to represent common customer experiences with the goal of accelerating the process of developing and deploying conforming AKS clusters using IaC. Each scenario will eventually have a Terraform, ARM and Bicep version. They will also include CI/CD pipelines to help automate deployment and management of these clusters and the workload that run in them.
 
 ### GUI driven Bicep Jumpstart
-A flexible templating approach using Bicep, it provides tangible artifacts to quickly enable AKS deployments through CLI or in your CI/CD pipeline. 
+A flexible templating approach using Bicep that covers multiple scenarios. It provides tangible artifacts to quickly enable AKS deployments through CLI or in your CI/CD pipeline. 
 Driving the configuration experience is a [GUI to guide your decision making](https://azure.github.io/Aks-Construction/?default=es), which caters for the main Enterprise-Scale deployment modes (Sandbox, Corp & Online).
 [Pipeline examples](https://github.com/Azure/Aks-Construction#devops---github-actions) are provided that show infrastructure and application workload testing. 
 
