@@ -16,6 +16,10 @@ jobs:
       ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       TF_VAR_admin_password: ${{ secrets.ADMIN_PASSWORD }}
       TF_VAR_access_key: ${{ secrets.ACCESS_KEY }}
+      REGION: "westus2"
+      STORAGEACCOUNTNAME: "storageaksayooo"
+      CONTAINERNAME: "akscs"
+      TFSTATE_RG: "tfstate"
     runs-on: ubuntu-latest
     environment: production
 
