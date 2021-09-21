@@ -3,7 +3,7 @@ name: 'Terraform'
 on:
   push:
     branches:
-    - main
+    - tf-workflows
   pull_request:
 
 jobs:
