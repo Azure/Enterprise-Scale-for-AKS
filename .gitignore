@@ -19,8 +19,7 @@
 .terraform
 
 # .tfstate files
-*.tfstate
-*.tfstate.*
+
 *.tfvars
 *.hcl
 *.vs
