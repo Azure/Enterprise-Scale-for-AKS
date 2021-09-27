@@ -1,5 +1,5 @@
 # AKS Secure Baseline with Private Cluster
-There are various ways to secure your AKS cluster. From a network security perspective, these can be classified into securing the control plane and securing the workload. When it comes to securing the controle plane, one of the best ways to do that is by using a private cluster, where the control plane or API server has internal IP addresses that are defined in the [RFC1918 - Address Allocation for Private Internet](https://datatracker.ietf.org/doc/html/rfc1918) document. By using a private cluster, you can ensure network traffic between your API server and your node pools remains on the private network only. For more details about private clusters, check out the [documentation](https://docs.microsoft.com/azure/aks/private-clusters). 
+There are various ways to secure your AKS cluster. From a network security perspective, these can be classified into securing the control plane and securing the workload. When it comes to securing the controle plane, one of the best ways to do that is by using a private cluster, where the control plane or API server has internal IP addresses that are defined in the [RFC1918 - Address Allocation for Private Internet](https://datatracker.ietf.org/doc/html/rfc1918) document. By using a private cluster, you can ensure network traffic between your API server and your node pools remains on the private network only. For more details about private clusters, check out the [documentation](https://docs.microsoft.com/azure/aks/private-clusters).
 
 When using a private cluster, the control plane can only be accessed from computers in the private network or peered networks. For this reason, in this reference implementation, we will be deploying a virtual machine in the Hub network through which we can connect to the control plane.
 
@@ -22,13 +22,13 @@ For this scenario, we have various IaC technology that you can choose from depen
 * Azure Bastion
 * Azure Monitor for containers
 * Azure firewall
-* MongoDB 
+* MongoDB
 * Helm
 * [Secret store CSI driver](https://docs.microsoft.com/azure/aks/csi-secrets-store-driver)
 * [Azure RBAC for Kubernetes Authorization](https://docs.microsoft.com/azure/aks/manage-azure-rbac)
 * [Azure Active Directory pod-managed identities](https://docs.microsoft.com/azure/aks/use-azure-ad-pod-identity)
 
-## A future workload for this scenario will include the following 
+## A future workload for this scenario will include the following
 * Horizontal Pod Autoscaling
 * Cluster Autoscaling
 * Readiness/Liveness Probes

@@ -1,0 +1,6 @@
+admin_password = "change me"
+admin_username = "sysadmin"
+
+#Don't bother putting the password as a default in the var, just use the tf vars file
+#terraform plan -input=false -var-file="terraform.tfvars"
+#terraform apply -input=false -var-file="terraform.tfvars" -auto-approve
