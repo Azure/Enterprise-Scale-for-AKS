@@ -1,6 +1,6 @@
-name: 'Terraform'
+#name: 'Terraform'
 
-on:
+#on:
   workflow_dispatch:
 jobs:
   terraform:

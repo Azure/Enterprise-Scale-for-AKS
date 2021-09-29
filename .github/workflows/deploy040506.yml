@@ -1,6 +1,6 @@
-name: 'hub and lz'
+#name: 'hub and lz'
 
-on:
+#on:
   push:
     branches:
     - main
