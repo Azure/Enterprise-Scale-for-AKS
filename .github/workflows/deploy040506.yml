@@ -17,8 +17,8 @@ jobs:
       TF_VAR_admin_password: ${{ secrets.ADMIN_PASSWORD }}
       TF_VAR_access_key: ${{ secrets.ACCESS_KEY }}
       TFSTATE_RG: tfstate
-      STORAGEACCOUNTNAME: akscs
-      CONTAINERNAME: awesomesaayo
+      STORAGEACCOUNTNAME: awesomesaayo
+      CONTAINERNAME: akscs 
 
     runs-on: ubuntu-latest
     environment: production

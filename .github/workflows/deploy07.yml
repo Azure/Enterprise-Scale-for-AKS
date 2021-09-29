@@ -12,8 +12,8 @@ jobs:
       ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       TF_VAR_access_key: ${{ secrets.ACCESS_KEY }}
       TFSTATE_RG: tfstate
-      STORAGEACCOUNTNAME: akscs
-      CONTAINERNAME: awesomesaayo
+      STORAGEACCOUNTNAME: awesomesaayo 
+      CONTAINERNAME: akscs
     runs-on: ubuntu-latest
     environment: production
 
