@@ -1,6 +1,6 @@
 # state_sa_name = <storage account name>
 container_name = "akscs"
-access_key = "XXXXXX"
+#access_key = "XXXXXX"
 prefix  = "akscs"
 
 
