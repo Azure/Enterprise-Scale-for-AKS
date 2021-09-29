@@ -1,4 +1,4 @@
-name: 'Terraform'
+name: 'hub and lz'
 
 on:
   push:
@@ -16,6 +16,7 @@ jobs:
       ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
       TF_VAR_admin_password: ${{ secrets.ADMIN_PASSWORD }}
       TF_VAR_access_key: ${{ secrets.ACCESS_KEY }}
+      TF_VAR_state_sa_name: awesomesaayo
       TFSTATE_RG: tfstate
       STORAGEACCOUNTNAME: awesomesaayo
       CONTAINERNAME: akscs 
