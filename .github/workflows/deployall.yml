@@ -43,14 +43,14 @@ jobs:
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan 03-AAD
-      working-directory: ./Scenarios/Secure-Baseline/Terraform/03-AAD
+      working-directory: ./Scenarios/Secure-Baseline/Terraform/03-AAD-import
       run: terraform plan
 
       # On push to main, build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply 03-AAD
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      working-directory: ./Scenarios/Secure-Baseline/Terraform/03-AAD
+      working-directory: ./Scenarios/Secure-Baseline/Terraform/03-AAD-import
       run: terraform apply -auto-approve
 
   terraform-hub-and-landingzone:
