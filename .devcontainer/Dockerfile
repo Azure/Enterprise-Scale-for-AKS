@@ -1,5 +1,13 @@
 # Note: You can use any Debian/Ubuntu base image
-FROM ghcr.io/retaildevcrews/dind
+FROM debian
+
+LABEL maintainer="AAA <AAA@gmail.com>"
+
+RUN apt-get update && \
+    apt-get -qy full-upgrade && \
+    apt-get install -qy curl && \
+    apt-get install -qy curl && \
+    curl -sSL https://get.docker.com/ | sh
 # FROM mcr.microsoft.com/vscode/devcontainers/base:focal
 
 # Avoid warnings by switching to noninteractive
@@ -8,8 +16,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Configure apt and install packages
 # Optional components
 # uncomment any you want to install
-RUN apt-get update && apt-get -y install nodejs 
-RUN apt-get -y install python3
+RUN apt-get install sudo
+# RUN apt-get update && apt-get -y install nodejs 
+# RUN apt-get -y install python3
 
 
 # uncomment these if you want terraform installed
@@ -25,5 +34,5 @@ ENV DEBIAN_FRONTEND=dialog
 # install selected components
 # many scripts take optional parameters
 # see the script header for details of each
-RUN echo "👋 Welcome to your devcontainer for construction sets! You are on a custom image defined in your devcontainer.json file.\n" > /usr/local/etc/vscode-dev-containers/first-run-notice.txt 
+RUN echo "👋 Welcome to your devcontainer for construction sets! You are on a custom image defined in your devcontainer.json file.\n" 
 
