@@ -19,10 +19,6 @@ jobs:
       TFSTATE_RG: tfstate
       STORAGEACCOUNTNAME: akstfstate001
       CONTAINERNAME: akscs
-      TF_VAR_subscription_id: ${{ secrets.AZURE_SUB_ID }}
-      TF_VAR_tenant_id: ${{ secrets.AZURE_TENANT_ID }}
-      TF_VAR_client_id: ${{ secrets.AZURE_CLIENT_ID }}
-      TF_VAR_client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
 
     runs-on: ubuntu-latest
   #  environment: production
@@ -43,11 +39,6 @@ jobs:
       with:
         creds: ${{ secrets.DEPLOYMENT_SP }}
 
-    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
-    - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v1
-      with:
-        cli_config_credentials_token: ${{ secrets.DEPLOYMENT_SP }}
 
     # Initialize the TF working directory.
     # Change the backend-config variables to match the storage account used for your deployments.
