@@ -19,6 +19,11 @@ jobs:
       TFSTATE_RG: tfstate
       STORAGEACCOUNTNAME: akstfstate001
       CONTAINERNAME: akscs
+      TF_VAR_subscription_id: ${{ secrets.AZURE_SUB_ID }}
+      TF_VAR_tenant_id: ${{ secrets.AZURE_TENANT_ID }}
+      TF_VAR_client_id: ${{ secrets.AZURE_CLIENT_ID }}
+      TF_VAR_client_secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+
     runs-on: ubuntu-latest
   #  environment: production
 
@@ -48,16 +53,16 @@ jobs:
     # Change the backend-config variables to match the storage account used for your deployments.
     - name: Terraform Init 03-AAD
       working-directory: ./Scenarios/AKS-Secure-Baseline-PrivateCluster/Terraform/03-AAD-import
-      run: terraform init -backend-config="resource_group_name=$TFSTATE_RG" -backend-config="storage_account_name=$STORAGEACCOUNTNAME" -backend-config="container_name=$CONTAINERNAME"
+      run: terraform init -input=false -backend-config="resource_group_name=$TFSTATE_RG" -backend-config="storage_account_name=$STORAGEACCOUNTNAME" -backend-config="container_name=$CONTAINERNAME"
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan 03-AAD
       working-directory: ./Scenarios/AKS-Secure-Baseline-PrivateCluster/Terraform/03-AAD-import
-      run: terraform plan
+      run: terraform plan -input=false
 
       # On push to main, build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply 03-AAD
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       working-directory: ./Scenarios/AKS-Secure-Baseline-PrivateCluster/Terraform/03-AAD-import
-      run: terraform apply -auto-approve
+      run: terraform apply -input=false -auto-approve

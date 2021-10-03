@@ -1,4 +1,4 @@
-# Update the variables in the BACKEND block to refrence the 
+# Update the variables in the BACKEND block to refrence the
 # storage account created out of band for TF statemanagement.
 
 terraform {
@@ -24,7 +24,7 @@ provider "azurerm" {
   client_id        = var.client_id
   client_secret    = var.client_secret
   subscription_id  = var.subscription_id
-  tenant_tenant_id = var.tenant_id
+  tenant_tenant_id = var.tenant_id // Myabe this is a permissions issue ?
 }
 
 provider "azuread" {
