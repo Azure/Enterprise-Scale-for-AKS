@@ -52,4 +52,8 @@ Pick one of the scenarios below to get started on a reference implementation
 
 :arrow_forward: [AKS Secure Baseline in a Private Cluster](./Scenarios/AKS-Secure-Baseline-PrivateCluster)
 
+### Other two repos
+
 :arrow_forward: [Bicep AKS Accelerator](https://github.com/Azure/Aks-Construction#getting-started)
+
+:arrow_forward: [CAF Terraform landingzones](https://github.com/Azure/caf-terraform-landingzones-starter/tree/starter/enterprise_scale/construction_sets/aks/online/aks_secure_baseline)
