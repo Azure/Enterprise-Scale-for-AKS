@@ -1,11 +1,11 @@
-# Update the variables in the BACKEND block to refrence the 
+# Update the variables in the BACKEND block to refrence the
 # storage account created out of band for TF statemanagement.
 
 terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = ">= 2.46.1"
+      version = ">= 2.79.0"
     }
 
   }
@@ -24,4 +24,5 @@ provider "azurerm" {
 }
 
 provider "azuread" {
+  use_microsoft_graph = true
 }
