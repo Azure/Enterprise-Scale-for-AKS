@@ -16,6 +16,7 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUB_ID }}
       ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      ARM_ENVIRONMENT: azurecloud
       TFSTATE_RG: tfstate
       STORAGEACCOUNTNAME: akstfstate002
       CONTAINERNAME: akscs
