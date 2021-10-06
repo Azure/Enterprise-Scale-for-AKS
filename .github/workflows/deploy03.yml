@@ -39,11 +39,11 @@ jobs:
       with:
         creds: ${{ secrets.DEPLOYMENT_SP }}
 
-#    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
-#    - name: Setup Terraform
-#      uses: hashicorp/setup-terraform@v1
-#      with:
-#        cli_config_credentials_token: ${{ secrets.DEPLOYMENT_SP }}
+    # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        cli_config_credentials_token: ${{ secrets.DEPLOYMENT_SP }}
 
     # Initialize the TF working directory.
     # Change the backend-config variables to match the storage account used for your deployments.
