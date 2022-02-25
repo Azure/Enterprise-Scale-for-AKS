@@ -9,7 +9,7 @@ Because the infrastructure has been deployed in a private AKS cluster setup, you
 * Add a rule in the Firewall to allow internet access to the VM's private IP. Verify VM's private IP and update if necessary
 
    ```bash
-   az network firewall network-rule create --collection-name 'VM-egress' --destination-ports '*' --firewall-name 'AZFW' --name 'Allow-Internet' --protocols Any --resource-group 'ESLZ-HUB' --action Allow --dest-addr '*' --priority 201 --source-addresses '10.0.3.4/32'
+   az network firewall network-rule create --collection-name 'VM-egress' --destination-ports '*' --firewall-name 'AZFW' --name 'Allow-Internet' --protocols Any --resource-group 'ESLZ-HUB' --action Allow --destination-addresses '*' --priority 201 --source-addresses '10.0.3.4/32'
    ```
 
 ## Connecting to the Bastion Host
@@ -46,7 +46,7 @@ Because the infrastructure has been deployed in a private AKS cluster setup, you
 
 ## Provide yourself Access to Create Secrets in your Key vault
 
-1. Go to the Azure portal and find your container registry.
+1. Go to the Azure portal and find your Key vault.
 2. Click on **Access policies** under **Settings** in the left blade![add access policy](../media/add-access-policy-acr.png)
 3. Select the required access policies ![add access policy](../media/add-access-policy-acr2.png)
 4. Under **Select principal** click on the **None selected** link and select the user group(s) you created for this to provide you and everyone in the group access to the Key vault
@@ -131,7 +131,7 @@ helm install ratings bitnami/mongodb --namespace ratingsapp --set auth.username=
 
 In this section you will be manipulating some deployment yaml files, replacing some entries related with Azure Key Vault, Azure Container Registry and Azure Active Directory references like ClientID, TenantID.
 
-All files will be under the following folder: "/Scenarios/AKS-Secure-Baseline-PrivateCluster/Apps/RatingsApp"
+All files will be under the following folder: "Scenarios/AKS-Secure-Baseline-PrivateCluster/Apps/RatingsApp"
 
 You will have to carefully update the following files:
 
@@ -142,7 +142,7 @@ You will have to carefully update the following files:
 
 ### Deploy workload
 
-Navigate to "/Scenarios/AKS-Secure-Baseline-PrivateCluster/Apps/RatingsApp" folder.
+Navigate to "Scenarios/AKS-Secure-Baseline-PrivateCluster/Apps/RatingsApp" folder.
 
 1. Updading **api-secret-provider-class.yaml**
 
