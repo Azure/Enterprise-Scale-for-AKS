@@ -164,5 +164,6 @@ module keyvaultAccessPolicy 'modules/keyvault/keyvault.bicep' = {
   params: {
     keyvaultManagedIdentityObjectId: aksCluster.outputs.keyvaultaddonIdentity
     vaultName: keyvaultName
+    aksuseraccessprincipalId: aksuseraccessprincipalId
   }
 }

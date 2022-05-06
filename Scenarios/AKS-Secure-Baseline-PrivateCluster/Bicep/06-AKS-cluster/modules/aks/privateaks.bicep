@@ -15,7 +15,7 @@ resource aksCluster 'Microsoft.ContainerService/managedClusters@2021-07-01' = {
     userAssignedIdentities: identity
   }
   properties: {
-    kubernetesVersion: '1.21.1'
+    kubernetesVersion: '1.22.6'
     nodeResourceGroup: '${clusterName}-aksInfraRG'
     podIdentityProfile: {
       enabled: true

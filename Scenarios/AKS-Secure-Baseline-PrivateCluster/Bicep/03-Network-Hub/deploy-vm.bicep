@@ -5,6 +5,7 @@ param rgName string
 param vnetSubnetName string
 param vnetName string
 param pubkeydata string
+param vmSize string
 
 resource subnetVM 'Microsoft.Network/virtualNetworks/subnets@2020-11-01' existing = {
   scope: resourceGroup(rgName)
@@ -17,5 +18,6 @@ module jumpbox 'modules/VM/virtualmachine.bicep' = {
   params: {
     subnetId: subnetVM.id
     publicKey: pubkeydata
+    vmSize: vmSize
   }
 }

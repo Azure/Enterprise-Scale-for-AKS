@@ -1,5 +1,6 @@
 param subnetId string
 param publicKey string
+param vmSize string
 //param script64 string
 
 module jbnic '../vnet/nic.bicep' = {
@@ -29,7 +30,7 @@ resource jumpbox 'Microsoft.Compute/virtualMachines@2021-03-01' = {
       }
     }
     hardwareProfile: {
-      vmSize: 'Standard_A2'
+      vmSize: vmSize
     }
     storageProfile: {
       osDisk: {
