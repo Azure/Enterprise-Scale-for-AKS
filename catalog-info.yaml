@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: Enterprise-Scale-for-AKS
+  title: Enterprise Scale for AKS Sample # optional, human readable component name
+  description: Create ES for AKS LZ.
+  annotations:
+    github.com/project-slug: dank-eng/Enterprise-Scale-for-AKS
+spec:
+  type: service
+  owner: user:dank-eng
+  lifecycle: experimental
