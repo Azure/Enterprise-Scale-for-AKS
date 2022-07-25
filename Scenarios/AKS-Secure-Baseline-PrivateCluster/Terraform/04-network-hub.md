@@ -19,13 +19,18 @@ To get started, you need to have done the following steps:
 When the Remote-SSH vs code extension is installed you should see the following icon in the lower left screen of your vs code windows
 ![Open SSH icon in vs code](../media/remote-ssh.png)
 
-To access and further lockdown the server-dev-linux vm change the `source_address_prefix` variable in the terraform.tfvars file to the public ip address that your local computer is using. The default value for `source_address_prefix` is `*` which means any inbound connection using port 22 will be able to hit the vm. To find the public IP address of your local machine use the following link : whatismypublicip.com
+To access and further lockdown the server-dev-linux vm change the `source_address_prefix` variable in the terraform.tfvars file to the public ip address that your local computer is using. The default value for `source_address_prefix` is `*` which means any inbound connection using port 22 will be able to hit the vm. To find the public IP address of your local machine use the following link : 
+
+**whatismypublicip.com**
 
 **Generate keys with ssh-keygen command**
 
 To generate your private key that will be installed on your local machine and the public key to be placed of the server-dev-linux vm use the ssh-keygen command running on an elevated shell (admin shell).
 
-The following command will created an 4096 bit RSA key pair (must use at a minimum 2048 bit) : ***ssh-keygen -t rsa -b 4096***. 
+The following command will created an 4096 bit RSA key pair (must use at a minimum 2048 bit) :  
+```
+ssh-keygen -t rsa -b 4096
+```
 
 The private key will be placed in the `C:\Users\User\.ssh\id_rsa` directory on your local machine. The public key will be placed in the `~/.ssh/id_rsa.pub` directory. You will take the contents of the id_rsa.pub file, copy it, and paste the value inside the the ssh_key_settings map located in the terraform.tfvars file.
 example :
@@ -37,7 +42,7 @@ ssh_key_settings = {
 }
 ```
 
-
+**NOTE**: If your id_rsa.pub ends with your region\yourUserName eg `NORTHAMERICA\username@DESKTOP-JQ99YPF`, you can remove thethe region and \ and save it to avoid having a Terraform error so your result should look similar to this `NORTHAMERICA\username@DESKTOP-JQ99YPF`.
 
 Navigate to "/Scenarios/AKS-Secure-Baseline-PrivateCluster/Terraform/04-Network-Hub" folder
 ```
@@ -62,38 +67,6 @@ terraform plan
 terraform apply
 ```
 
-**Connecting into the server-dev-linux vm using SSH**
-
-When the server-dev-linux vm is provisioned with the inbound NSG rule allowing your local machine's public IP to connect to the it, navigate to the lower left hand of your screen and click on the Remote - SSH.
-
-![Open SSH icon in vs code](../media/remote-ssh.png)
-
-**Click connect to Host**
-
-![Connect to Host](../media/connect-to-host.png)
-
-**Connect to the remote host**
-
-Enter the username needed to login into the VM and the Public IP address of the server-dev-linux virtual machine.
-
-![Connect to Host](../media/connect-to-host-using-pip.png)
-
-**SSH VS Code Window**
-
-When the username and pip are entered a new SSH VS Code window will open. When the window appears, at the top select `Linux` as the platform for the remote host.
-
-![Linux Host](../media/linux-platform.png)
-
-**Verify Fingerprint**
-
-When the Fingerprint drop down appears, select continue.
-
-![Fingerprint](../media/fingerprint.png)
-
-**Successfully connecting to the remote host**
-
-When connected to the server-dev-linux vm using an SSH tunnel, in the bottom left hand corner you will see that you are connected to the VM using SSH and the Public IP address assigned to the server-dev-linux vm.
-
-![Successful connection](../media/ssh-connected.png)
+If you get an error about changes to the configuration, go with the `-reconfigure` flag option.
 
 :arrow_forward: [Creation of Spoke Network & its respective Components](./05-network-lz.md)

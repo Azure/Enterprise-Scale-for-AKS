@@ -6,19 +6,28 @@ Depending on the needs of your organization, you may have a choice of existing g
 
 Navigate to "/Scenarios/AKS-Secure-Baseline-PrivateCluster/Bicep/02-AAD" folder
 
-Use az cli or Az PowerShell to create the AD groups
+Use az cli or Az PowerShell to create the AD groups. Replace the AAD group names below with the name of the AAD groups you want to create eg AKS_ES_dev, AKS_ES_ops. There should be no space in the names.
 
 # [CLI](#tab/CLI)
 
 ```azurecli
-appdevs=''
-aksops=''
+appdevs=<AAD group name>
+aksops=<AAD group name>
 
 az ad group create --display-name $appdevs --mail-nickname $appdevs
 az ad group create --display-name $aksops --mail-nickname $aksops
 ```
 
 # [PowerShell](#tab/PowerShell)
+Running the command to create the new AAD groups requires the New-AzADGroup cmdlet. More details can be found [here](https://docs.microsoft.com/en-us/powershell/azure/install-az-ps?view=azps-7.0.0).
+
+Install New-AzADGroup cmdlet
+```azurepowershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Install-Module -Name Az -Scope CurrentUser -Repository PSGallery -Force
+```
+
+Run the command below to create two new AAD groups in your tenant. 
 
 ```azurepowershell
 ./ad_groups.ps1 -appdevs <App Dev Group> -aksops <AKS Operations Team>
